@@ -15,16 +15,20 @@ boton.addEventListener("click", () => {
   textoBoton.textContent = primeraVez ? "Te amo" : "Otra vez";
   primeraVez = false;
 
-  crearLluviaDeCorazones(30);
-  crearDestellos(18);
+  // En celulares usamos menos elementos para mantener una animación fluida.
+  const esCelular = window.matchMedia("(max-width: 600px)").matches;
+  crearLluviaDeCorazones(esCelular ? 20 : 30);
+  crearDestellos(esCelular ? 12 : 18);
 
-  // Lleva suavemente la sorpresa al centro en pantallas pequeñas.
-  setTimeout(() => {
-    sorpresa.scrollIntoView({
-      behavior: "smooth",
-      block: "center"
-    });
-  }, 450);
+  // En pantallas pequeñas desplazamos la vista hacia la sorpresa.
+  if (window.matchMedia("(max-width: 768px)").matches) {
+    setTimeout(() => {
+      sorpresa.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }, 450);
+  }
 });
 
 function crearLluviaDeCorazones(cantidad) {

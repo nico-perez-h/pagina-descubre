@@ -16,14 +16,22 @@
 
 html {
   min-height: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   min-height: 100vh;
+  min-height: 100dvh;
   overflow-x: hidden;
-  display: grid;
-  place-items: center;
-  padding: 24px;
+  overflow-y: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding:
+    max(18px, env(safe-area-inset-top))
+    max(18px, env(safe-area-inset-right))
+    max(18px, env(safe-area-inset-bottom))
+    max(18px, env(safe-area-inset-left));
   position: relative;
   background:
     radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.55), transparent 26%),
@@ -47,11 +55,15 @@ body::before {
 
 .contenedor {
   width: min(100%, 760px);
+  min-width: 0;
+  margin-block: auto;
   position: relative;
   z-index: 2;
 }
 
 .tarjeta {
+  width: 100%;
+  min-width: 0;
   position: relative;
   overflow: hidden;
   text-align: center;
@@ -102,6 +114,8 @@ h1 {
   align-items: center;
   gap: 10px;
   min-width: 175px;
+  min-height: 52px;
+  max-width: 100%;
   justify-content: center;
   padding: 15px 30px;
   border: 2px solid rgba(255, 255, 255, 0.88);
@@ -169,7 +183,7 @@ h1 {
 }
 
 .sorpresa.visible {
-  max-height: 1100px;
+  max-height: 2200px;
   opacity: 1;
   margin-top: 34px;
 }
@@ -192,10 +206,11 @@ h1 {
 #foto {
   display: block;
   width: 100%;
-  max-height: 510px;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
+  height: auto;
+  max-height: min(510px, 58dvh);
+  object-fit: contain;
   border-radius: 21px;
+  background: #fff7f8;
 }
 
 .brillo-foto {
@@ -456,21 +471,212 @@ h1 {
   }
 }
 
-@media (max-width: 520px) {
+/* Tabletas y pantallas medianas */
+@media (max-width: 768px) {
   body {
-    padding: 14px;
+    padding:
+      max(14px, env(safe-area-inset-top))
+      max(14px, env(safe-area-inset-right))
+      max(14px, env(safe-area-inset-bottom))
+      max(14px, env(safe-area-inset-left));
   }
 
   .tarjeta {
-    border-radius: 26px;
+    padding: clamp(28px, 7vw, 46px) clamp(17px, 5vw, 34px);
+    border-radius: 28px;
   }
 
-  .mensaje span {
-    letter-spacing: 0.11em;
+  .foto-contenedor {
+    width: min(100%, 390px);
+  }
+
+  #foto {
+    max-height: min(500px, 56dvh);
+  }
+}
+
+/* Celulares */
+@media (max-width: 560px) {
+  body {
+    padding:
+      max(10px, env(safe-area-inset-top))
+      max(10px, env(safe-area-inset-right))
+      max(10px, env(safe-area-inset-bottom))
+      max(10px, env(safe-area-inset-left));
+  }
+
+  .tarjeta {
+    padding: 28px 16px 30px;
+    border-radius: 24px;
+  }
+
+  .tarjeta::after {
+    right: -22px;
+    top: -38px;
+    font-size: 135px;
+  }
+
+  .subtitulo {
+    margin-bottom: 9px;
+    font-size: clamp(11px, 3.4vw, 14px);
+    line-height: 1.5;
+    letter-spacing: 0.12em;
+  }
+
+  h1 {
+    margin-bottom: 22px;
+    font-size: clamp(29px, 10vw, 43px);
+    line-height: 1.08;
   }
 
   .boton {
-    min-width: 165px;
+    width: min(100%, 270px);
+    min-width: 0;
+    padding: 14px 22px;
+    font-size: 17px;
+  }
+
+  .sorpresa.visible {
+    margin-top: 28px;
+  }
+
+  .foto-contenedor {
+    width: min(100%, 355px);
+    padding: 7px;
+    border-radius: 23px;
+  }
+
+  #foto {
+    max-height: min(470px, 54dvh);
+    border-radius: 17px;
+  }
+
+  .mensaje {
+    width: 100%;
+    margin-top: 22px;
+  }
+
+  .mensaje span {
+    font-size: clamp(24px, 8vw, 35px);
+    letter-spacing: 0.11em;
+  }
+
+  .mensaje strong {
+    margin-top: 10px;
+    font-size: clamp(61px, 20vw, 88px);
+  }
+
+  .dedicatoria {
+    width: min(100%, 430px);
+    margin-top: 15px;
+    padding-inline: 4px;
+    font-size: clamp(14px, 4vw, 17px);
+    line-height: 1.55;
+  }
+
+  .luz-1 {
+    left: -150px;
+  }
+
+  .luz-2 {
+    right: -190px;
+  }
+}
+
+/* Celulares muy pequeños */
+@media (max-width: 380px) {
+  .tarjeta {
+    padding: 23px 12px 26px;
+    border-radius: 20px;
+  }
+
+  .subtitulo {
+    font-size: 10.5px;
+  }
+
+  h1 {
+    font-size: clamp(27px, 10.5vw, 35px);
+  }
+
+  .boton {
+    width: 100%;
+    min-height: 50px;
+  }
+
+  .foto-contenedor {
+    padding: 6px;
+    border-radius: 20px;
+  }
+
+  #foto {
+    border-radius: 15px;
+  }
+
+  .mensaje span {
+    font-size: 23px;
+    letter-spacing: 0.08em;
+  }
+
+  .mensaje strong {
+    font-size: clamp(57px, 19vw, 72px);
+  }
+
+  .dedicatoria {
+    font-size: 14px;
+  }
+}
+
+/* Celulares girados horizontalmente */
+@media (orientation: landscape) and (max-height: 600px) {
+  body {
+    padding-block: 10px;
+  }
+
+  .tarjeta {
+    padding-block: 22px;
+  }
+
+  .subtitulo {
+    font-size: 11px;
+  }
+
+  h1 {
+    margin-bottom: 16px;
+    font-size: clamp(29px, 5vw, 39px);
+  }
+
+  .boton {
+    min-height: 46px;
+    padding-block: 11px;
+  }
+
+  .sorpresa.visible {
+    margin-top: 20px;
+  }
+
+  .foto-contenedor {
+    width: min(46vw, 320px);
+  }
+
+  #foto {
+    max-height: 52dvh;
+  }
+
+  .mensaje {
+    margin-top: 15px;
+  }
+
+  .mensaje span {
+    font-size: 25px;
+  }
+
+  .mensaje strong {
+    font-size: 62px;
+  }
+
+  .dedicatoria {
+    margin-top: 10px;
+    font-size: 14px;
   }
 }
 
