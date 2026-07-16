@@ -3,19 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Descubre</title>
+  <meta name="theme-color" content="#ffb6c1">
+  <title>Una sorpresa para mamá</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Luces decorativas del fondo -->
+  <div class="luz luz-1" aria-hidden="true"></div>
+  <div class="luz luz-2" aria-hidden="true"></div>
+  <div class="luz luz-3" aria-hidden="true"></div>
+
+  <!-- Aquí se crearán los corazones animados -->
+  <div id="efectos" class="efectos" aria-hidden="true"></div>
 
   <main class="contenedor">
-    <h1>Una pequeña sorpresa</h1>
+    <section class="tarjeta">
+      <p class="subtitulo">Tengo una pequeña sorpresa para ti</p>
+      <h1>Para la mejor mamá del mundo</h1>
 
-    <button id="botonDescubre" type="button">Descubre</button>
+      <button id="botonDescubre" class="boton" type="button">
+        <span class="boton-corazon">♥</span>
+        <span id="textoBoton">Descubre</span>
+      </button>
 
-    <div class="foto-contenedor">
-      <img id="foto" src="foto.jpg" alt="Foto sorpresa">
-    </div>
+      <div id="sorpresa" class="sorpresa" aria-live="polite">
+        <div class="foto-contenedor">
+          <div class="brillo-foto" aria-hidden="true"></div>
+          <img id="foto" src="foto.jpg" alt="Una fotografía especial para mamá">
+        </div>
+
+        <h2 id="mensaje" class="mensaje">
+          <span>TE AMO</span>
+          <strong>MAMITA</strong>
+        </h2>
+
+        <p id="dedicatoria" class="dedicatoria">
+          Gracias por cuidarme, apoyarme y estar siempre conmigo.
+        </p>
+      </div>
+    </section>
   </main>
 
   <script src="script.js"></script>
